@@ -37,17 +37,12 @@ def naked_twins(values):
     # TODO remove repetition
     n_twins_rep = [[a,b] for a in twins for b in twins and peers[a] if values[a] == values[b]]
     for i in n_twins_rep:
-        # For each pair of twins
-        twin1 = i[0]
-        twin2 = i[1]
-        # Find the common peers
-        peers1 = peers[twin1]
-        peers2 = peers[twin2]
-        peers_int = peers1 & peers2
+        # For each pair of twins, Find the common peers
+        commonPeers = peers[i[0]] & peers[i[1]]
         # Erase the common peer values
-        for x in peers_int:
+        for x in commonPeers:
             if len(values[x])>1:
-                for y in values[twin1]:
+                for y in values[i[0]]:
                     values = assign_value(values, x, values[x].replace(y,''))
     return values
 
